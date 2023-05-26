@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
-    private val studentsArray = arrayOf(
+    private val studentsArray = listOf(
         Student("Антон", 4),
         Student("Егор", 7),
         Student("Маша", 3),
