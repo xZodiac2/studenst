@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
-    private val studentsArray = listOf(
+    private val students = listOf(
         Student("Антон", 4),
         Student("Егор", 7),
         Student("Маша", 3),
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        studentsArray.forEach { student ->
+        students.forEach { student ->
             when (student.grade) {
                 in Grade.Bad.gradeRange -> student.status = Status.Bad
                 in Grade.Normal.gradeRange -> student.status = Status.Normal
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fillArray(studentsArrayWithStatus: MutableList<Student>, necessaryStatus: Status) {
-        studentsArray.forEach  { student ->
+        students.forEach  { student ->
             if (student.status.meaning == necessaryStatus.meaning) studentsArrayWithStatus.add(student)
         }
     }
