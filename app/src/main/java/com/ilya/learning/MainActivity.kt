@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                 in Grade.Normal.gradeRange -> student.status = Status.Normal
                 in Grade.Nice.gradeRange -> student.status = Status.Nice
                 Grade.Excellent.grade -> student.status = Status.Excellent
-                else -> student.status = Status.NullStatus
+                else -> student.status = Status.WithoutStatus
             }
         }
 
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         fillArray(normalStudents, Status.Normal)
         fillArray(niceStudents, Status.Nice)
         fillArray(excellentStudents, Status.Excellent)
-        fillArray(undefinedStudents, Status.NullStatus)
+        fillArray(undefinedStudents, Status.WithoutStatus)
 
 
         printStudents(badStudents)

@@ -7,5 +7,5 @@ sealed class Status(
     object Normal : Status("нормальный ученик")
     object Nice : Status("хороший ученик")
     object Excellent : Status("отличный ученик")
-    object NullStatus : Status("без статуса")
+    object WithoutStatus : Status("без статуса")
 }
