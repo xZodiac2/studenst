@@ -8,7 +8,7 @@ data class Student(
     val status by lazy { defineStatus() }
     
     private fun defineStatus(): Status {
-        return when (this.grade) {
+        return when (grade) {
             in Grade.Bad.gradeRange -> Status.Bad
             in Grade.Normal.gradeRange -> Status.Normal
             in Grade.Nice.gradeRange -> Status.Nice
