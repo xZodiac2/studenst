@@ -4,6 +4,7 @@ sealed class Grade() {
     
     lateinit var gradeRange: IntRange
         private set
+    
     var grade: Int = -1
         private set
 
