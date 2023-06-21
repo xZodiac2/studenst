@@ -25,38 +25,33 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        students.forEach { student ->
-            when (student.grade) {
-                in Grade.Bad.gradeRange -> student.status = Status.Bad
-                in Grade.Normal.gradeRange -> student.status = Status.Normal
-                in Grade.Nice.gradeRange -> student.status = Status.Nice
-                Grade.Excellent.grade -> student.status = Status.Excellent
-                else -> student.status = Status.WithoutStatus
-            }
-        }
-
+        
+        fillStudentArrays()
+        printAllStudents()
+    }
+    
+    private fun fillStudentArrays() {
         fillArray(badStudents, Status.Bad)
         fillArray(normalStudents, Status.Normal)
         fillArray(niceStudents, Status.Nice)
         fillArray(excellentStudents, Status.Excellent)
         fillArray(undefinedStudents, Status.WithoutStatus)
-
-
+    }
+    
+    private fun fillArray(studentsArrayWithGivenStatus: MutableList<Student>, givenStatus: Status) {
+        students.forEach  { student ->
+            if (student.status == givenStatus) studentsArrayWithGivenStatus.add(student)
+        }
+    }
+    
+    private fun printAllStudents() {
         printStudents(badStudents)
         printStudents(normalStudents)
         printStudents(niceStudents)
         printStudents(excellentStudents)
         printStudents(undefinedStudents)
-
     }
-
-    private fun fillArray(studentsArrayWithStatus: MutableList<Student>, necessaryStatus: Status) {
-        students.forEach  { student ->
-            if (student.status.meaning == necessaryStatus.meaning) studentsArrayWithStatus.add(student)
-        }
-    }
-
+    
     private fun printStudents(students: MutableList<Student>) {
         students.forEach { studentInfo ->
             Log.d("msg", "${studentInfo.name} ${studentInfo.status.meaning}: оценка ${studentInfo.grade}")
