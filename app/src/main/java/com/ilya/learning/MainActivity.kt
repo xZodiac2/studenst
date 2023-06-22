@@ -16,45 +16,18 @@ class MainActivity : AppCompatActivity() {
         Student("Почему", -1)
     )
 
-    private var badStudents = mutableListOf<Student>()
-    private var normalStudents = mutableListOf<Student>()
-    private var niceStudents = mutableListOf<Student>()
-    private var excellentStudents = mutableListOf<Student>()
-    private var undefinedStudents = mutableListOf<Student>()
+    private val ratedStudents = mutableMapOf<Student, Status>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        
-        fillStudentArrays()
-        printAllStudents()
-    }
     
-    private fun fillStudentArrays() {
-        fillArray(badStudents, Status.Bad)
-        fillArray(normalStudents, Status.Normal)
-        fillArray(niceStudents, Status.Nice)
-        fillArray(excellentStudents, Status.Excellent)
-        fillArray(undefinedStudents, Status.WithoutStatus)
-    }
-    
-    private fun fillArray(studentsArrayWithGivenStatus: MutableList<Student>, givenStatus: Status) {
-        students.forEach  { student ->
-            if (student.status == givenStatus) studentsArrayWithGivenStatus.add(student)
+        students.forEach { student ->
+            ratedStudents[student] = Status.defineStudentStatus(student)
         }
-    }
-    
-    private fun printAllStudents() {
-        printStudents(badStudents)
-        printStudents(normalStudents)
-        printStudents(niceStudents)
-        printStudents(excellentStudents)
-        printStudents(undefinedStudents)
-    }
-    
-    private fun printStudents(students: MutableList<Student>) {
-        students.forEach { studentInfo ->
-            Log.d("msg", "${studentInfo.name} ${studentInfo.status.meaning}: оценка ${studentInfo.grade}")
+        
+        ratedStudents.forEach { student, status ->
+            Log.d("msg", "${student.name} ${status.meaning}: оценка ${student.grade}")
         }
     }
 
