@@ -16,50 +16,18 @@ class MainActivity : AppCompatActivity() {
         Student("Почему", -1)
     )
 
-    private var badStudents = mutableListOf<Student>()
-    private var normalStudents = mutableListOf<Student>()
-    private var niceStudents = mutableListOf<Student>()
-    private var excellentStudents = mutableListOf<Student>()
-    private var undefinedStudents = mutableListOf<Student>()
+    private val ratedStudents = mutableMapOf<Student, Status>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+    
         students.forEach { student ->
-            when (student.grade) {
-                in Grade.Bad.gradeRange -> student.status = Status.Bad
-                in Grade.Normal.gradeRange -> student.status = Status.Normal
-                in Grade.Nice.gradeRange -> student.status = Status.Nice
-                Grade.Excellent.grade -> student.status = Status.Excellent
-                else -> student.status = Status.WithoutStatus
-            }
+            ratedStudents[student] = Status.defineStudentStatus(student)
         }
-
-        fillArray(badStudents, Status.Bad)
-        fillArray(normalStudents, Status.Normal)
-        fillArray(niceStudents, Status.Nice)
-        fillArray(excellentStudents, Status.Excellent)
-        fillArray(undefinedStudents, Status.WithoutStatus)
-
-
-        printStudents(badStudents)
-        printStudents(normalStudents)
-        printStudents(niceStudents)
-        printStudents(excellentStudents)
-        printStudents(undefinedStudents)
-
-    }
-
-    private fun fillArray(studentsArrayWithStatus: MutableList<Student>, necessaryStatus: Status) {
-        students.forEach  { student ->
-            if (student.status.meaning == necessaryStatus.meaning) studentsArrayWithStatus.add(student)
-        }
-    }
-
-    private fun printStudents(students: MutableList<Student>) {
-        students.forEach { studentInfo ->
-            Log.d("msg", "${studentInfo.name} ${studentInfo.status.meaning}: оценка ${studentInfo.grade}")
+        
+        ratedStudents.forEach { student, status ->
+            Log.d("msg", "${student.name} ${status.meaning}: оценка ${student.grade}")
         }
     }
 

@@ -1,8 +1,6 @@
 package com.ilya.learning
 
-class Student(
+data class Student(
     val name: String,
     val grade: Int
-) {
-    lateinit var status: Status
-}
+)
